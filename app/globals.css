@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(210, 40%, 98%);
+  --foreground: hsl(215, 25%, 27%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(215, 25%, 27%);
+
+  --primary: hsl(0, 80%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+
+  --secondary: hsl(210, 20%, 96%);
+  --secondary-foreground: hsl(215, 25%, 27%);
+
+  --muted: hsl(215, 20%, 90%);
+  --muted-foreground: hsl(215, 25%, 40%);
+
+  --accent: hsl(45, 100%, 50%);
+  --accent-foreground: hsl(215, 25%, 27%);
+
+  --destructive: hsl(0, 90%, 45%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+
+  --border: hsl(215, 20%, 85%);
+  --input: hsl(215, 20%, 85%);
+  --ring: hsl(0, 80%, 50%);
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(215, 50%, 10%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(215, 50%, 15%);
+  --card-foreground: hsl(210, 40%, 98%);
+
+  --primary: hsl(0, 70%, 45%);
+  --primary-foreground: hsl(0, 0%, 100%);
+
+  --secondary: hsl(215, 50%, 20%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+
+  --muted: hsl(215, 50%, 20%);
+  --muted-foreground: hsl(215, 20%, 70%);
+
+  --accent: hsl(45, 70%, 45%);
+  --accent-foreground: hsl(215, 25%, 27%);
+
+  --destructive: hsl(0, 70%, 40%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+
+  --border: hsl(215, 50%, 25%);
+  --input: hsl(215, 50%, 25%);
+  --ring: hsl(0, 70%, 45%);
+}
+
+.gv-red-blue {
+  --background: hsl(
+    0,
+    60%,
+    95%
+  ); /* Softer background for better contrast with red and blue */
+  --primary: hsl(0, 80%, 50%);
+  --accent: hsl(210, 80%, 50%);
+}
+
+.gv-firered-leafgreen {
+  --background: hsl(0, 60%, 94%);
+  --primary: hsl(0, 80%, 50%);
+  --accent: hsl(120, 60%, 45%);
+}
+
+.gv-yellow {
+  --background: hsl(45, 65%, 95%); /* Light yellow for a fresh look */
+  --primary: hsl(45, 90%, 55%);
+  --accent: hsl(0, 70%, 45%);
+}
+
+.gv-gold-silver,
+.gv-crystal {
+  --background: hsl(50, 30%, 95%); /* A touch brighter gold background */
+  --primary: hsl(50, 90%, 50%);
+  --accent: hsl(210, 15%, 75%);
+}
+
+.gv-ruby-sapphire,
+.gv-emerald,
+.gv-omega-ruby-alpha-sapphire {
+  --background: hsl(120, 45%, 95%); /* Fresh green for nature themes */
+  --primary: hsl(0, 75%, 50%);
+  --accent: hsl(210, 75%, 45%);
+}
+
+.gv-diamond-pearl,
+.gv-platinum,
+.gv-brilliant-diamond-shining-pearl {
+  --background: hsl(260, 35%, 96%); /* Brighter, elegant background */
+  --primary: hsl(260, 85%, 55%);
+  --accent: hsl(0, 0%, 98%);
+}
+
+.gv-heartgold-soulsilver {
+  --background: hsl(42, 40%, 96%); /* Softened gold background */
+  --primary: hsl(42, 90%, 55%);
+  --accent: hsl(210, 15%, 75%);
+}
+
+.gv-black-white,
+.gv-black-2-white-2 {
+  --background: hsl(0, 0%, 98%);
+  --primary: hsl(0, 0%, 15%);
+  --accent: hsl(0, 0%, 85%);
+}
+
+.gv-x-y {
+  --background: hsl(210, 60%, 96%); /* A brighter, more cheerful blue */
+  --primary: hsl(210, 90%, 55%);
+  --accent: hsl(0, 80%, 60%);
+}
+
+.gv-sun-moon,
+.gv-ultra-sun-ultra-moon {
+  --background: hsl(29, 90%, 96%); /* Softer, sunny background */
+  --primary: hsl(29, 100%, 55%);
+  --accent: hsl(230, 80%, 65%); /* Contrast accent for better readability */
+}
+
+.gv-sword-shield {
+  --background: hsl(330, 55%, 96%); /* Bright background for a valiant theme */
+  --primary: hsl(330, 85%, 60%);
+  --accent: hsl(210, 85%, 50%);
+}
+
+.gv-legends-arceus {
+  --background: hsl(200, 20%, 95%); /* Soft, calming background */
+  --primary: hsl(200, 40%, 40%);
+  --accent: hsl(45, 30%, 55%);
+}
+
+.gv-scarlet-violet {
+  --background: hsl(340, 55%, 96%); /* Lively, fresh background */
+  --primary: hsl(340, 90%, 55%);
+  --accent: hsl(265, 80%, 55%);
+}
