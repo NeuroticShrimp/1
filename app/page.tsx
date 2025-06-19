@@ -67,7 +67,7 @@ export default function PokemonApp() {
   const cacheStats = getCacheStats()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-4">
+    <div className="min-h-screen bg-primary p-4">
       <div className="container mx-auto max-w-6xl">
         {/* Top Left Game Filter */}
         <div className="absolute top-4 left-4 z-10">

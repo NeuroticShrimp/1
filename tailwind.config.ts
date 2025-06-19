@@ -1,20 +1,17 @@
 import type { Config } from 'tailwindcss'
 
 /**
- * Tailwind matches the design tokens defined in globals.css.
- * – Every colour points at a CSS variable that already exists
- * – All background-image utilities were removed (you dropped them)
- * – “popover”, “sidebar”, and “chart” groups were removed because the
- *   variables don’t exist in the CSS source-of-truth you shared
+ * Combined config – adds <alpha-value> support to every CSS-variable colour
+ * while keeping your existing container, animations, Pokémon themes, & plugins.
  */
 const config: Config = {
-  darkMode: ['class'], // .dark { … } in your CSS
-
+  darkMode: ['class'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{ts,tsx}',
+    '*.{js,ts,jsx,tsx,mdx}',
   ],
 
   theme: {
@@ -25,19 +22,25 @@ const config: Config = {
     },
 
     extend: {
-      /* 1. COLOURS — one entry per CSS variable ------------------------- */
+      /* ------------------------------------------------- */
+      /* 1. COLOURS
+      /* ------------------------------------------------- */
       colors: {
-        /* single-token scales */
+        /* single-token colours */
         background: 'hsl(var(--background) / <alpha-value>)',
         foreground: 'hsl(var(--foreground) / <alpha-value>)',
         border: 'hsl(var(--border) / <alpha-value>)',
         input: 'hsl(var(--input) / <alpha-value>)',
         ring: 'hsl(var(--ring) / <alpha-value>)',
 
-        /* paired tokens */
+        /* grouped palettes */
         card: {
           DEFAULT: 'hsl(var(--card) / <alpha-value>)',
           foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
+          foreground: 'hsl(var(--popover-foreground) / <alpha-value>)',
         },
         primary: {
           DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
@@ -59,8 +62,20 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
           foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',
         },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background) / <alpha-value>)',
+          foreground: 'hsl(var(--sidebar-foreground) / <alpha-value>)',
+          primary: 'hsl(var(--sidebar-primary) / <alpha-value>)',
+          'primary-foreground':
+            'hsl(var(--sidebar-primary-foreground) / <alpha-value>)',
+          accent: 'hsl(var(--sidebar-accent) / <alpha-value>)',
+          'accent-foreground':
+            'hsl(var(--sidebar-accent-foreground) / <alpha-value>)',
+          border: 'hsl(var(--sidebar-border) / <alpha-value>)',
+          ring: 'hsl(var(--sidebar-ring) / <alpha-value>)',
+        },
 
-        /* Pokémon-type swatches (kept verbatim) */
+        /* Pokémon-type + generation swatches (hex stays as-is) */
         pokemonTypes: {
           fire: '#EE8130',
           water: '#6390F0',
@@ -91,24 +106,72 @@ const config: Config = {
           gen7: '#FF8C00',
           gen8: '#9400D3',
         },
+
+        /* chart palette */
+        chart: {
+          '1': 'hsl(var(--chart-1) / <alpha-value>)',
+          '2': 'hsl(var(--chart-2) / <alpha-value>)',
+          '3': 'hsl(var(--chart-3) / <alpha-value>)',
+          '4': 'hsl(var(--chart-4) / <alpha-value>)',
+          '5': 'hsl(var(--chart-5) / <alpha-value>)',
+        },
       },
 
-      /* 2. RADIUS ------------------------------------------------------- */
+      /* ------------------------------------------------- */
+      /* 2. BORDER RADIUS
+      /* ------------------------------------------------- */
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
 
-      /* 3. ANIMATION & EFFECTS ----------------------------------------- */
+      /* ------------------------------------------------- */
+      /* 3. BACKGROUND IMAGES
+      /* ------------------------------------------------- */
+      backgroundImage: {
+        'pokeball-pattern': "url('/pokeball-bg.svg')",
+        'pokedex-texture': "url('/pokedex-texture.png')",
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
+
+      /* ------------------------------------------------- */
+      /* 4. ANIMATIONS & SHADOWS
+      /* ------------------------------------------------- */
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'bounce-slow': 'bounce 3s infinite',
+        'spin-slow': 'spin 3s linear infinite',
+        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       boxShadow: {
         'pokemon-card':
-          '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06)',
+          '0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06), 0 0 0 3px rgba(66,153,225,0.5)',
       },
+      safelist: [
+        'dark',
+        'red-blue',
+        'firered-leafgreen',
+        'yellow',
+        'gold-silver',
+        'crystal',
+        'ruby-sapphire',
+        'emerald',
+        'omega-ruby-alpha-sapphire',
+        'diamond-pearl',
+        'platinum',
+        'brilliant-diamond-shining-pearl',
+        'heartgold-soulsilver',
+        'black-white',
+        'black-2-white-2',
+        'x-y',
+        'sun-moon',
+        'ultra-sun-ultra-moon',
+        'sword-shield',
+        'legends-arceus',
+        'scarlet-violet',
+      ],
     },
   },
 

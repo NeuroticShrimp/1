@@ -2,30 +2,33 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme =
-  | 'light'
-  | 'dark'
-  | 'red-blue'
-  | 'yellow'
-  | 'gold-silver'
-  | 'crystal'
-  | 'ruby-sapphire'
-  | 'emerald'
-  | 'firered-leafgreen'
-  | 'diamond-pearl'
-  | 'platinum'
-  | 'heartgold-soulsilver'
-  | 'black-white'
-  | 'black-2-white-2'
-  | 'x-y'
-  | 'omega-ruby-alpha-sapphire'
-  | 'sun-moon'
-  | 'ultra-sun-ultra-moon'
-  | 'sword-shield'
-  | 'brilliant-diamond-shining-pearl'
-  | 'legends-arceus'
-  | 'scarlet-violet'
-  | 'system'
+const themes = [
+  'light',
+  'dark',
+  'red-blue',
+  'yellow',
+  'gold-silver',
+  'crystal',
+  'ruby-sapphire',
+  'emerald',
+  'firered-leafgreen',
+  'diamond-pearl',
+  'platinum',
+  'heartgold-soulsilver',
+  'black-white',
+  'black-2-white-2',
+  'x-y',
+  'omega-ruby-alpha-sapphire',
+  'sun-moon',
+  'ultra-sun-ultra-moon',
+  'sword-shield',
+  'brilliant-diamond-shining-pearl',
+  'legends-arceus',
+  'scarlet-violet',
+  'system',
+] as const
+
+type Theme = (typeof themes)[number]
 
 type ThemeProviderState = {
   theme: Theme
@@ -65,13 +68,7 @@ export function ThemeProvider({
     const root = document.documentElement
 
     // Remove all theme classes
-    root.classList.remove(
-      'light',
-      'dark',
-      'pokemon-red',
-      'pokemon-blue',
-      'pokemon-yellow',
-    )
+    themes.forEach((theme) => root.classList.remove(theme))
 
     // Handle system theme
     if (theme === 'system') {
@@ -92,6 +89,7 @@ export function ThemeProvider({
     theme,
     setTheme: (theme: Theme) => {
       setTheme(theme)
+      console.log('theme is', theme)
     },
   }
 

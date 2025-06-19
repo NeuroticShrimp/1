@@ -56,90 +56,121 @@
   --ring: hsl(0, 70%, 45%);
 }
 
-.gv-red-blue {
-  --background: hsl(
-    0,
-    60%,
-    95%
-  ); /* Softer background for better contrast with red and blue */
+.red-blue {
+  --background: hsl(0, 60%, 95%);
   --primary: hsl(0, 80%, 50%);
   --accent: hsl(210, 80%, 50%);
 }
 
-.gv-firered-leafgreen {
+.firered-leafgreen {
   --background: hsl(0, 60%, 94%);
   --primary: hsl(0, 80%, 50%);
   --accent: hsl(120, 60%, 45%);
 }
 
-.gv-yellow {
-  --background: hsl(45, 65%, 95%); /* Light yellow for a fresh look */
-  --primary: hsl(45, 90%, 55%);
-  --accent: hsl(0, 70%, 45%);
-}
+/* Pokemon Yellow Theme */
 
-.gv-gold-silver,
-.gv-crystal {
+.yellow {
+  --background: 45 50% 97%;
+
+  --foreground: 45 60% 25%;
+
+  --card: 45 30% 100%;
+
+  --card-foreground: 45 60% 25%;
+
+  --popover: 45 30% 100%;
+
+  --popover-foreground: 45 60% 25%;
+
+  --primary: 45 80% 50%;
+
+  --primary-foreground: 0 0% 20%;
+
+  --secondary: 45 20% 90%;
+
+  --secondary-foreground: 45 60% 25%;
+
+  --muted: 45 20% 90%;
+
+  --muted-foreground: 45 40% 40%;
+
+  --accent: 45 80% 90%;
+
+  --accent-foreground: 45 60% 25%;
+
+  --destructive: 0 100% 40%;
+
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 45 30% 85%;
+
+  --input: 45 30% 85%;
+
+  --ring: 45 80% 50%;
+}
+.gold-silver,
+.crystal {
   --background: hsl(50, 30%, 95%); /* A touch brighter gold background */
   --primary: hsl(50, 90%, 50%);
   --accent: hsl(210, 15%, 75%);
 }
 
-.gv-ruby-sapphire,
-.gv-emerald,
-.gv-omega-ruby-alpha-sapphire {
+.ruby-sapphire,
+.emerald,
+.omega-ruby-alpha-sapphire {
   --background: hsl(120, 45%, 95%); /* Fresh green for nature themes */
   --primary: hsl(0, 75%, 50%);
   --accent: hsl(210, 75%, 45%);
 }
 
-.gv-diamond-pearl,
-.gv-platinum,
-.gv-brilliant-diamond-shining-pearl {
+.diamond-pearl,
+.platinum,
+.brilliant-diamond-shining-pearl {
   --background: hsl(260, 35%, 96%); /* Brighter, elegant background */
   --primary: hsl(260, 85%, 55%);
   --accent: hsl(0, 0%, 98%);
 }
 
-.gv-heartgold-soulsilver {
+.heartgold-soulsilver {
   --background: hsl(42, 40%, 96%); /* Softened gold background */
   --primary: hsl(42, 90%, 55%);
   --accent: hsl(210, 15%, 75%);
 }
 
-.gv-black-white,
-.gv-black-2-white-2 {
+.black-white,
+.black-2-white-2 {
   --background: hsl(0, 0%, 98%);
   --primary: hsl(0, 0%, 15%);
   --accent: hsl(0, 0%, 85%);
 }
 
-.gv-x-y {
+.x-y {
   --background: hsl(210, 60%, 96%); /* A brighter, more cheerful blue */
   --primary: hsl(210, 90%, 55%);
   --accent: hsl(0, 80%, 60%);
 }
 
-.gv-sun-moon,
-.gv-ultra-sun-ultra-moon {
+.sun-moon,
+.ultra-sun-ultra-moon {
   --background: hsl(29, 90%, 96%); /* Softer, sunny background */
   --primary: hsl(29, 100%, 55%);
   --accent: hsl(230, 80%, 65%); /* Contrast accent for better readability */
 }
 
-.gv-sword-shield {
+.sword-shield {
   --background: hsl(330, 55%, 96%); /* Bright background for a valiant theme */
   --primary: hsl(330, 85%, 60%);
   --accent: hsl(210, 85%, 50%);
 }
 
-.gv-legends-arceus {
+.legends-arceus {
   --background: hsl(200, 20%, 95%); /* Soft, calming background */
   --primary: hsl(200, 40%, 40%);
   --accent: hsl(45, 30%, 55%);
 }
 
-.gv-scarlet-violet {
+.scarlet-violet {
   --background: hsl(340, 55%, 96%); /* Lively, fresh background */
   --primary: hsl(340, 90%, 55%);
   --accent: hsl(265, 80%, 55%);
