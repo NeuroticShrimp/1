@@ -32,9 +32,13 @@ export function ThemeSwitcher() {
           <Moon className="mr-2 h-4 w-4" />
           <span>Dark</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('red-blue')}>
+        <DropdownMenuItem onClick={() => setTheme('red')}>
           <Palette className="mr-2 h-4 w-4 text-red-600" />
-          <span>Red & Blue</span>
+          <span>Red</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('blue')}>
+          <Palette className="mr-2 h-4 w-4 text-red-600" />
+          <span>Blue</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('yellow')}>
           <Palette className="mr-2 h-4 w-4 text-yellow-500" />

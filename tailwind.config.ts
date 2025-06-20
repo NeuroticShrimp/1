@@ -151,7 +151,8 @@ const config: Config = {
       },
       safelist: [
         'dark',
-        'red-blue',
+        'red',
+        'blue',
         'firered-leafgreen',
         'yellow',
         'gold-silver',

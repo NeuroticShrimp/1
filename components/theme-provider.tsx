@@ -5,7 +5,8 @@ import { createContext, useContext, useEffect, useState } from 'react'
 const themes = [
   'light',
   'dark',
-  'red-blue',
+  'red',
+  'blue',
   'yellow',
   'gold-silver',
   'crystal',
