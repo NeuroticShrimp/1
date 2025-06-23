@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { PokemonCard } from '@/components/pokemon-card'
 import { PokemonSearch } from '@/components/pokemon-search'
 import { PokemonList } from '@/components/pokemon-list'
-import { GameFilterDropdown } from '@/components/game-filter-dropdown'
 import { CacheStatsCompact } from '@/components/cache-stats-compact'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -69,14 +68,6 @@ export default function PokemonApp() {
   return (
     <div className="min-h-screen bg-primary p-4">
       <div className="container mx-auto max-w-6xl">
-        {/* Top Left Game Filter */}
-        <div className="absolute top-4 left-4 z-10">
-          <GameFilterDropdown
-            currentVersion={gameFilter}
-            onVersionChange={setGameFilter}
-          />
-        </div>
-
         {/* Main Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-6 flex items-center justify-center gap-2">

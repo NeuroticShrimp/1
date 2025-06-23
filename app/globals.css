@@ -3,189 +3,344 @@
 @tailwind utilities;
 
 :root {
-  --background: 210 40% 98%;
-  --foreground: 215 25% 27%;
-  --card: 0 0% 100%;
-  --card-foreground: 215 25% 27%;
+  --background: 210 40% 98%; /*hsl(210, 40%, 98%)*/
+  --foreground: 215 25% 27%; /*hsl(215, 25%, 27%)*/
+  --card: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+  --card-foreground: 215 25% 27%; /*hsl(215, 25%, 27%)*/
 
-  --primary: 0 80% 50%;
-  --primary-foreground: 0 0% 100%;
+  --primary: 0 80% 50%; /*hsl(0, 80%, 50%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
 
-  --secondary: 210 20% 96%;
-  --secondary-foreground: 215 25% 27%;
+  --popover: 200 20% 95%; /*hsl()*/
 
-  --muted: 215 20% 90%;
-  --muted-foreground: 215 25% 40%;
+  --secondary: 210 20% 96%; /*hsl(210, 20%, 96%)*/
+  --secondary-foreground: 215 25% 27%; /*hsl(215, 25%, 27%)*/
 
-  --accent: 45 100% 50%;
-  --accent-foreground: 215 25% 27%;
+  --muted: 215 20% 90%; /*hsl(215, 20%, 90%)*/
+  --muted-foreground: 215 25% 40%; /*hsl(215, 25%, 40%)*/
 
-  --destructive: 0 90% 45%;
-  --destructive-foreground: 0 0% 100%;
+  --accent: 45 100% 50%; /*hsl(45, 100%, 50%)*/
+  --accent-foreground: 215 25% 27%; /*hsl(215, 25%, 27%)*/
 
-  --border: 215 20% 85%;
-  --input: 215 20% 85%;
-  --ring: 0 80% 50%;
+  --destructive: 0 90% 45%; /*hsl(0, 90%, 45%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 215 20% 85%; /*hsl(215, 20%, 85%)*/
+  --input: 215 20% 85%; /*hsl(215, 20%, 85%)*/
+  --ring: 0 80% 50%; /*hsl(0, 80%, 50%)*/
 
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: 215 50% 10%;
-  --foreground: 210 40% 98%;
-  --card: 215 50% 15%;
-  --card-foreground: 210 40% 98%;
+  --background: 215 50% 10%; /*hsl(215, 50%, 10%)*/
+  --foreground: 210 40% 98%; /*hsl(210, 40%, 98%)*/
+  --card: 215 50% 15%; /*hsl(215, 50%, 15%)*/
+  --card-foreground: 210 40% 98%; /*hsl(210, 40%, 98%)*/
 
-  --primary: 0 70% 45%;
-  --primary-foreground: 0 0% 100%;
+  --primary: 0 70% 45%; /*hsl(0, 70%, 45%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
 
-  --secondary: 215 50% 20%;
-  --secondary-foreground: 210 40% 98%;
+  --secondary: 215 50% 20%; /*hsl(215, 50%, 20%)*/
+  --secondary-foreground: 210 40% 98%; /*hsl(210, 40%, 98%)*/
 
-  --muted: 215 50% 20%;
-  --muted-foreground: 215 20% 70%;
+  --muted: 215 50% 20%; /*hsl(215, 50%, 20%)*/
+  --muted-foreground: 215 20% 70%; /*hsl(215, 20%, 70%)*/
 
-  --accent: 45 70% 45%;
-  --accent-foreground: 215 25% 27%;
+  --accent: 45 70% 45%; /*hsl(45, 70%, 45%)*/
+  --accent-foreground: 215 25% 27%; /*hsl(215, 25%, 27%)*/
 
-  --destructive: 0 70% 40%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive: 0 70% 40%; /*hsl(0, 70%, 40%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
 
-  --border: 215 50% 25%;
-  --input: 215 50% 25%;
-  --ring: 0 70% 45%;
+  --border: 215 50% 25%; /*hsl(215, 50%, 25%)*/
+  --input: 215 50% 25%; /*hsl(215, 50%, 25%)*/
+  --ring: 0 70% 45%; /*hsl(0, 70%, 45%)*/
 }
 
 .red {
-  --background: 3, 95%, 38%;
-  --foreground: 3, 95%, 38%;
-  --card: 3, 95%, 38%;
-  --card-foreground: 3, 95%, 38%;
+  --background: 0, 60%, 95%; /*  hsl(0, 60%, 95%) */
+  --foreground: 6 100% 92%; /* hsl(6, 100%, 92%)*/
 
-  --primary: 3, 95%, 38%;
-  --primary-foreground: 3, 95%, 38%;
+  --primary: 6 95% 38%; /* hsl(6, 95%, 38%)*/
 
-  --secondary: 3, 95%, 38%;
-  --secondary-foreground: 3, 95%, 38%;
+  --secondary-foreground: 3 95% 38%; /* hsl(3, 95%, 38%)*/
 
-  --muted: 215 50% 20%;
-  --muted-foreground: 215 20% 70%;
+  --muted: 280 2% 26%; /* hsl(280, 2%, 26%)*/
 
-  --accent: 3, 95%, 38%;
-  --accent-foreground: 3, 95%, 38%;
-
-  --destructive: 0 70% 40%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 3, 95%, 38%;
-  --input: 3, 95%, 38%;
-  --ring: 3, 95%, 38%;
+  --accent: 312 6% 67%; /*hsl(312, 6%, 67%)*/
 }
 
 .blue {
-  --background: 0 60% 95%;
-  --primary: 0 80% 50%;
-  --accent: 210 80% 50%;
+  --background: 0 60% 95%; /*hsl(0, 60%, 95%)*/
+  --primary: 0 80% 50%; /*hsl(0, 80%, 50%)*/
+  --accent: 210 80% 50%; /*hsl(210, 80%, 50%)*/
 }
 
+/* FireRed / LeafGreen */
 .firered-leafgreen {
-  --background: 0 60% 94%;
-  --primary: 0 80% 50%;
-  --accent: 120 60% 45%;
+  --background: 0 60% 96%; /*hsl(0, 60%, 96%)*/
+  --foreground: 120 40% 20%; /*hsl(120, 40%, 20%)*/
+  --card: 0 100% 97%; /*hsl(0, 100%, 97%)*/
+  --card-foreground: 120 40% 20%; /*hsl(120, 40%, 20%)*/
+
+  --primary: 0 80% 50%; /*hsl(0, 80%, 50%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --secondary: 120 40% 40%; /*hsl(120, 40%, 40%)*/
+  --secondary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --muted: 120 20% 85%; /*hsl(120, 20%, 85%)*/
+  --muted-foreground: 120 20% 35%; /*hsl(120, 20%, 35%)*/
+
+  --accent: 120 70% 45%; /*hsl(120, 70%, 45%)*/
+  --accent-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --destructive: 0 90% 45%; /*hsl(0, 90%, 45%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 120 20% 75%; /*hsl(120, 20%, 75%)*/
+  --input: 120 20% 75%; /*hsl(120, 20%, 75%)*/
+  --ring: 0 80% 50%; /*hsl(0, 80%, 50%)*/
 }
 
 .yellow {
-  --background: 45 50% 97%;
-  --foreground: 45 60% 25%;
-  --card: 45 30% 100%;
-  --card-foreground: 45 60% 25%;
+  --background: 45 50% 97%; /*hsl(45, 50%, 97%)*/
+  --foreground: 45 60% 25%; /*hsl(45, 60%, 25%)*/
+  --card: 45 30% 100%; /*hsl(45, 30%, 100%)*/
+  --card-foreground: 45 60% 25%; /*hsl(45, 60%, 25%)*/
 
-  --popover: 45 30% 100%;
-  --popover-foreground: 45 60% 25%;
+  --popover: 45 30% 100%; /*hsl(45, 30%, 100%)*/
+  --popover-foreground: 45 60% 25%; /*hsl(45, 60%, 25%)*/
 
-  --primary: 45 80% 50%;
-  --primary-foreground: 0 0% 20%;
+  --primary: 45 80% 50%; /*hsl(45, 80%, 50%)*/
+  --primary-foreground: 0 0% 20%; /*hsl(0, 0%, 20%)*/
 
-  --secondary: 45 20% 90%;
-  --secondary-foreground: 45 60% 25%;
+  --secondary: 45 20% 90%; /*hsl(45, 20%, 90%)*/
+  --secondary-foreground: 45 60% 25%; /*hsl(45, 60%, 25%)*/
 
-  --muted: 45 20% 90%;
-  --muted-foreground: 45 40% 40%;
+  --muted: 45 20% 90%; /*hsl(45, 20%, 90%)*/
+  --muted-foreground: 45 40% 40%; /*hsl(45, 40%, 40%)*/
 
-  --accent: 45 80% 90%;
-  --accent-foreground: 45 60% 25%;
+  --accent: 45 80% 90%; /*hsl(45, 80%, 90%)*/
+  --accent-foreground: 45 60% 25%; /*hsl(45, 60%, 25%)*/
 
-  --destructive: 0 100% 40%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive: 0 100% 40%; /*hsl(0, 100%, 40%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
 
-  --border: 45 30% 85%;
-  --input: 45 30% 85%;
-  --ring: 45 80% 50%;
+  --border: 45 30% 85%; /*hsl(45, 30%, 85%)*/
+  --input: 45 30% 85%; /*hsl(45, 30%, 85%)*/
+  --ring: 45 80% 50%; /*hsl(45, 80%, 50%)*/
 }
 
 .gold-silver,
 .crystal {
-  --background: 50 30% 95%;
-  --primary: 50 90% 50%;
-  --accent: 210 15% 75%;
+  --background: 50 30% 95%; /*hsl(50, 30%, 95%)*/
+  --primary: 50 90% 50%; /*hsl(50, 90%, 50%)*/
+  --accent: 210 15% 75%; /*hsl(210, 15%, 75%)*/
 }
 
+/* Ruby / Sapphire / Emerald */
 .ruby-sapphire,
-.emerald,
-.omega-ruby-alpha-sapphire {
-  --background: 120 45% 95%;
-  --primary: 0 75% 50%;
-  --accent: 210 75% 45%;
+.emerald {
+  --background: 120 40% 96%; /*hsl(120, 40%, 96%)*/
+  --foreground: 0 60% 20%; /*hsl(0, 60%, 20%)*/
+  --card: 120 100% 98%; /*hsl(120, 100%, 98%)*/
+  --card-foreground: 0 60% 20%; /*hsl(0, 60%, 20%)*/
+
+  --primary: 0 75% 50%; /*hsl(0, 75%, 50%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --secondary: 210 75% 45%; /*hsl(210, 75%, 45%)*/
+  --secondary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --muted: 210 20% 85%; /*hsl(210, 20%, 85%)*/
+  --muted-foreground: 210 20% 35%; /*hsl(210, 20%, 35%)*/
+
+  --accent: 120 60% 45%; /*hsl(120, 60%, 45%)*/
+  --accent-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --destructive: 0 70% 40%; /*hsl(0, 70%, 40%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 120 20% 75%; /*hsl(120, 20%, 75%)*/
+  --input: 120 20% 75%; /*hsl(120, 20%, 75%)*/
+  --ring: 0 75% 50%; /*hsl(0, 75%, 50%)*/
 }
 
 .diamond-pearl,
-.platinum,
-.brilliant-diamond-shining-pearl {
-  --background: 260 35% 96%;
-  --primary: 260 85% 55%;
-  --accent: 0 0% 98%;
+.platinum {
+  --background: 260 35% 96%; /*hsl(260, 35%, 96%)*/
+  --foreground: 260 40% 20%; /*hsl(260, 40%, 20%)*/
+  --card: 260 100% 98%; /*hsl(260, 100%, 98%)*/
+  --card-foreground: 260 40% 20%; /*hsl(260, 40%, 20%)*/
+
+  --primary: 260 85% 55%; /*hsl(260, 85%, 55%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --secondary: 0 0% 90%; /*hsl(0, 0%, 90%)*/
+  --secondary-foreground: 260 40% 20%; /*hsl(260, 40%, 20%)*/
+
+  --muted: 0 0% 85%; /*hsl(0, 0%, 85%)*/
+  --muted-foreground: 0 0% 40%; /*hsl(0, 0%, 40%)*/
+
+  --accent: 300 80% 60%; /*hsl(300, 80%, 60%)*/
+  --accent-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --destructive: 0 80% 40%; /*hsl(0, 80%, 40%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 260 20% 75%; /*hsl(260, 20%, 75%)*/
+  --input: 260 20% 75%; /*hsl(260, 20%, 75%)*/
+  --ring: 260 85% 55%; /*hsl(260, 85%, 55%)*/
 }
 
+/* HeartGold / SoulSilver */
 .heartgold-soulsilver {
-  --background: 42 40% 96%;
-  --primary: 42 90% 55%;
-  --accent: 210 15% 75%;
+  --background: 42 40% 96%; /*hsl(42, 40%, 96%)*/
+  --foreground: 42 60% 25%; /*hsl(42, 60%, 25%)*/
+  --card: 42 100% 98%; /*hsl(42, 100%, 98%)*/
+  --card-foreground: 42 60% 25%; /*hsl(42, 60%, 25%)*/
+
+  --primary: 42 90% 55%; /*hsl(42, 90%, 55%)*/
+  --primary-foreground: 0 0% 10%; /*hsl(0, 0%, 10%)*/
+
+  --secondary: 210 15% 75%; /*hsl(210, 15%, 75%)*/
+  --secondary-foreground: 0 0% 20%; /*hsl(0, 0%, 20%)*/
+
+  --muted: 42 20% 85%; /*hsl(42, 20%, 85%)*/
+  --muted-foreground: 42 40% 35%; /*hsl(42, 40%, 35%)*/
+
+  --accent: 210 15% 75%; /*hsl(210, 15%, 75%)*/
+  --accent-foreground: 0 0% 20%; /*hsl(0, 0%, 20%)*/
+
+  --destructive: 0 90% 45%; /*hsl(0, 90%, 45%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 42 30% 80%; /*hsl(42, 30%, 80%)*/
+  --input: 42 30% 80%; /*hsl(42, 30%, 80%)*/
+  --ring: 42 90% 55%; /*hsl(42, 90%, 55%)*/
 }
 
-.black-white,
-.black-2-white-2 {
-  --background: 0 0% 98%;
-  --primary: 0 0% 15%;
-  --accent: 0 0% 85%;
+/* Black / White */
+.black-white {
+  --background: 0 0% 98%; /*hsl(0, 0%, 98%)*/
+  --foreground: 0 0% 15%; /*hsl(0, 0%, 15%)*/
+  --card: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+  --card-foreground: 0 0% 15%; /*hsl(0, 0%, 15%)*/
+
+  --primary: 0 0% 15%; /*hsl(0, 0%, 15%)*/
+  --primary-foreground: 0 0% 98%; /*hsl(0, 0%, 98%)*/
+
+  --secondary: 0 0% 90%; /*hsl(0, 0%, 90%)*/
+  --secondary-foreground: 0 0% 15%; /*hsl(0, 0%, 15%)*/
+
+  --muted: 0 0% 80%; /*hsl(0, 0%, 80%)*/
+  --muted-foreground: 0 0% 40%; /*hsl(0, 0%, 40%)*/
+
+  --accent: 0 0% 60%; /*hsl(0, 0%, 60%)*/
+  --accent-foreground: 0 0% 98%; /*hsl(0, 0%, 98%)*/
+
+  --destructive: 0 90% 45%; /*hsl(0, 90%, 45%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 0 0% 85%; /*hsl(0, 0%, 85%)*/
+  --input: 0 0% 85%; /*hsl(0, 0%, 85%)*/
+  --ring: 0 0% 15%; /*hsl(0, 0%, 15%)*/
 }
 
+/* X / Y */
 .x-y {
-  --background: 210 60% 96%;
-  --primary: 210 90% 55%;
-  --accent: 0 80% 60%;
+  --background: 210 60% 96%; /*hsl(210, 60%, 96%)*/
+  --foreground: 210 60% 25%; /*hsl(210, 60%, 25%)*/
+  --card: 210 80% 98%; /*hsl(210, 80%, 98%)*/
+  --card-foreground: 210 60% 25%; /*hsl(210, 60%, 25%)*/
+
+  --primary: 210 90% 55%; /*hsl(210, 90%, 55%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --secondary: 0 80% 60%; /*hsl(0, 80%, 60%)*/
+  --secondary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --muted: 210 20% 85%; /*hsl(210, 20%, 85%)*/
+  --muted-foreground: 210 20% 35%; /*hsl(210, 20%, 35%)*/
+
+  --accent: 0 80% 60%; /*hsl(0, 80%, 60%)*/
+  --accent-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --destructive: 0 70% 45%; /*hsl(0, 70%, 45%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 210 20% 75%; /*hsl(210, 20%, 75%)*/
+  --input: 210 20% 75%; /*hsl(210, 20%, 75%)*/
+  --ring: 210 90% 55%; /*hsl(210, 90%, 55%)*/
 }
 
-.sun-moon,
-.ultra-sun-ultra-moon {
-  --background: 29 90% 96%;
-  --primary: 29 100% 55%;
-  --accent: 230 80% 65%;
+/* Sun / Moon */
+.sun-moon {
+  --background: 29 90% 96%; /*hsl(29, 90%, 96%)*/
+  --foreground: 29 80% 25%; /*hsl(29, 80%, 25%)*/
+  --card: 29 100% 98%; /*hsl(29, 100%, 98%)*/
+  --card-foreground: 29 80% 25%; /*hsl(29, 80%, 25%)*/
+
+  --primary: 29 100% 55%; /*hsl(29, 100%, 55%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --secondary: 230 80% 65%; /*hsl(230, 80%, 65%)*/
+  --secondary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --muted: 29 20% 85%; /*hsl(29, 20%, 85%)*/
+  --muted-foreground: 29 40% 40%; /*hsl(29, 40%, 40%)*/
+
+  --accent: 230 80% 65%; /*hsl(230, 80%, 65%)*/
+  --accent-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --destructive: 0 90% 45%; /*hsl(0, 90%, 45%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 29 20% 80%; /*hsl(29, 20%, 80%)*/
+  --input: 29 20% 80%; /*hsl(29, 20%, 80%)*/
+  --ring: 29 100% 55%; /*hsl(29, 100%, 55%)*/
 }
 
 .sword-shield {
-  --background: 330 55% 96%;
-  --primary: 330 85% 60%;
-  --accent: 210 85% 50%;
+  --background: 330 55% 96%; /*hsl(330, 55%, 96%)*/
+  --primary: 330 85% 60%; /*hsl(330, 85%, 60%)*/
+  --accent: 210 85% 50%; /*hsl(210, 85%, 50%)*/
 }
 
 .legends-arceus {
-  --background: 200 20% 95%;
-  --primary: 200 40% 40%;
-  --accent: 45 30% 55%;
+  --background: 200 20% 95%; /*hsl(200, 20%, 95%)*/
+  --foreground: 326 10% 14%; /* hsl(326, 10%, 14%) */
+  --primary: 200 40% 40%; /*hsl(200, 40%, 40%)*/
+
+  --muted: 355 51% 54%; /*hsl(355, 51%, 54%)*/
+  --accent: 192 14% 82%; /*hsl(182, 14%, 82%)*/
 }
 
+/* Scarlet / Violet */
 .scarlet-violet {
-  --background: 340 55% 96%;
-  --primary: 340 90% 55%;
-  --accent: 265 80% 55%;
+  --background: 340 55% 96%; /*hsl(340, 55%, 96%)*/
+  --foreground: 340 70% 25%; /*hsl(340, 70%, 25%)*/
+  --card: 340 80% 98%; /*hsl(340, 80%, 98%)*/
+  --card-foreground: 340 70% 25%; /*hsl(340, 70%, 25%)*/
+
+  --primary: 340 90% 55%; /*hsl(340, 90%, 55%)*/
+  --primary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --secondary: 265 80% 55%; /*hsl(265, 80%, 55%)*/
+  --secondary-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --muted: 340 20% 85%; /*hsl(340, 20%, 85%)*/
+  --muted-foreground: 340 40% 40%; /*hsl(340, 40%, 40%)*/
+
+  --accent: 265 80% 55%; /*hsl(265, 80%, 55%)*/
+  --accent-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --destructive: 0 90% 45%; /*hsl(0, 90%, 45%)*/
+  --destructive-foreground: 0 0% 100%; /*hsl(0, 0%, 100%)*/
+
+  --border: 340 20% 80%; /*hsl(340, 20%, 80%)*/
+  --input: 340 20% 80%; /*hsl(340, 20%, 80%)*/
+  --ring: 340 90% 55%; /*hsl(340, 90%, 55%)*/
 }

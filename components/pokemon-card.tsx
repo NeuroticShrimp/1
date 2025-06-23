@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Loader2, RefreshCw } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Loader2, RefreshCw } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import {
   usePokemon,
   usePokemonSpecies,
@@ -12,16 +12,16 @@ import {
   useEncounters,
   useTmMoves,
   parseEvolutionChain,
-} from "@/hooks/use-pokemon-data"
-import { PokemonStats } from "@/components/pokemon-stats"
-import { PokemonMoves } from "@/components/pokemon-moves"
-import { PokemonLocations } from "@/components/pokemon-locations"
-import { PokemonEvolution } from "@/components/pokemon-evolution"
-import { PokemonImage } from "@/components/pokemon-image"
-import { DittoLoader } from "@/components/ditto-loader"
-import { PokemonAudioPlayer } from "@/components/pokemon-audio-player"
-import { GameVersionSelector } from "@/components/game-version-selector"
-import { useGameVersion } from "@/hooks/use-game-version"
+} from '@/hooks/use-pokemon-data'
+import { PokemonStats } from '@/components/pokemon-stats'
+import { PokemonMoves } from '@/components/pokemon-moves'
+import { PokemonLocations } from '@/components/pokemon-locations'
+import { PokemonEvolution } from '@/components/pokemon-evolution'
+import { PokemonImage } from '@/components/pokemon-image'
+import { DittoLoader } from '@/components/ditto-loader'
+import { PokemonAudioPlayer } from '@/components/pokemon-audio-player'
+import { GameVersionSelector } from '@/components/game-version-selector'
+import { useGameVersion } from '@/hooks/use-game-version'
 
 interface PokemonCardProps {
   pokemonName: string
@@ -39,7 +39,11 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
     isFetching: pokemonFetching,
   } = usePokemon(pokemonName)
 
-  const { data: species, isLoading: speciesLoading, error: speciesError } = usePokemonSpecies(pokemon?.id)
+  const {
+    data: species,
+    isLoading: speciesLoading,
+    error: speciesError,
+  } = usePokemonSpecies(pokemon?.id)
 
   const {
     data: evolutionChain,
@@ -47,7 +51,11 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
     error: evolutionError,
   } = useEvolutionChain(species?.evolution_chain.url)
 
-  const { data: encounters, isLoading: encountersLoading, error: encountersError } = useEncounters(pokemon?.id)
+  const {
+    data: encounters,
+    isLoading: encountersLoading,
+    error: encountersError,
+  } = useEncounters(pokemon?.id)
 
   const tmMovesQueries = useTmMoves(pokemon?.moves, gameVersion)
   const tmMovesLoading = tmMovesQueries.some((query) => query.isLoading)
@@ -61,61 +69,82 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
       machines: query.data!.machines.filter(
         (machine) =>
           machine.version_group.name === gameVersion ||
-          (gameVersion === "red-blue" && machine.version_group.name === "yellow"),
+          (gameVersion === 'red-blue' &&
+            machine.version_group.name === 'yellow'),
       ),
     }))
 
-  const getTypeColor = (type: string) => {
-    const colors: Record<string, string> = {
-      fire: "bg-red-500",
-      water: "bg-blue-500",
-      grass: "bg-green-500",
-      electric: "bg-yellow-500",
-      psychic: "bg-pink-500",
-      ice: "bg-cyan-500",
-      dragon: "bg-purple-500",
-      dark: "bg-gray-800",
-      fairy: "bg-pink-300",
-      normal: "bg-gray-400",
-      fighting: "bg-red-700",
-      poison: "bg-purple-600",
-      ground: "bg-yellow-600",
-      flying: "bg-indigo-400",
-      bug: "bg-green-400",
-      rock: "bg-yellow-800",
-      ghost: "bg-purple-700",
-      steel: "bg-gray-500",
+  const getTypeColor = (type: string): { base: string; hover: string } => {
+    const colors: Record<string, { base: string; hover: string }> = {
+      fire: { base: 'bg-red-500', hover: 'hover:bg-red-500/80' },
+      water: { base: 'bg-blue-500', hover: 'hover:bg-blue-500/80' },
+      grass: { base: 'bg-green-500', hover: 'hover:bg-green-500/80' },
+      electric: { base: 'bg-yellow-500', hover: 'hover:bg-yellow-500/80' },
+      psychic: { base: 'bg-pink-500', hover: 'hover:bg-pink-500/80' },
+      ice: { base: 'bg-cyan-500', hover: 'hover:bg-cyan-500/80' },
+      dragon: { base: 'bg-purple-500', hover: 'hover:bg-purple-500/80' },
+      dark: { base: 'bg-gray-800', hover: 'hover:bg-gray-800/80' },
+      fairy: { base: 'bg-pink-300', hover: 'hover:bg-pink-300/80' },
+      normal: { base: 'bg-gray-400', hover: 'hover:bg-gray-400/80' },
+      fighting: { base: 'bg-red-700', hover: 'hover:bg-red-700/80' },
+      poison: { base: 'bg-purple-600', hover: 'hover:bg-purple-600/80' },
+      ground: { base: 'bg-yellow-600', hover: 'hover:bg-yellow-600/80' },
+      flying: { base: 'bg-indigo-400', hover: 'hover:bg-indigo-400/80' },
+      bug: { base: 'bg-green-400', hover: 'hover:bg-green-400/80' },
+      rock: { base: 'bg-yellow-800', hover: 'hover:bg-yellow-800/80' },
+      ghost: { base: 'bg-purple-700', hover: 'hover:bg-purple-700/80' },
+      steel: { base: 'bg-gray-500', hover: 'hover:bg-gray-500/80' },
     }
-    return colors[type] || "bg-gray-400"
+
+    return (
+      colors[type] || { base: 'bg-gray-400', hover: 'hover:bg-gray-400/80' }
+    )
   }
 
-  const isLoading = pokemonLoading || speciesLoading || evolutionLoading || encountersLoading || tmMovesLoading
-  const hasError = pokemonError || speciesError || evolutionError || encountersError
+  const isLoading =
+    pokemonLoading ||
+    speciesLoading ||
+    evolutionLoading ||
+    encountersLoading ||
+    tmMovesLoading
+  const hasError =
+    pokemonError || speciesError || evolutionError || encountersError
 
   if (pokemonLoading && !pokemon) {
     return <LoadingCard />
   }
 
   if (hasError && !pokemon) {
-    return <ErrorCard error={pokemonError?.message} onRetry={() => refetchPokemon()} />
+    return (
+      <ErrorCard
+        error={pokemonError?.message}
+        onRetry={() => refetchPokemon()}
+      />
+    )
   }
 
   if (!pokemon) return null
 
-  const evolutions = evolutionChain ? parseEvolutionChain(evolutionChain.chain) : []
+  const evolutions = evolutionChain
+    ? parseEvolutionChain(evolutionChain.chain)
+    : []
   const filteredEncounters =
     encounters?.filter((encounter) =>
       encounter.version_details.some((detail) => {
-        if (gameVersion === "red-blue") {
-          return detail.version.name === "red" || detail.version.name === "blue"
+        if (gameVersion === 'red-blue') {
+          return detail.version.name === 'red' || detail.version.name === 'blue'
         }
-        return detail.version.name === gameVersion.split("-")[0]
+        return detail.version.name === gameVersion.split('-')[0]
       }),
     ) || []
 
   return (
     <Card className="w-full max-w-4xl mx-auto bg-white/95 backdrop-blur">
-      <PokemonHeader pokemon={pokemon} isFetching={pokemonFetching} getTypeColor={getTypeColor} />
+      <PokemonHeader
+        pokemon={pokemon}
+        isFetching={pokemonFetching}
+        getTypeColor={getTypeColor}
+      />
 
       <CardContent>
         <div className="flex justify-between items-center mb-4">
@@ -123,23 +152,31 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
             {/* Pass both pokemon object and gameVersion */}
             <PokemonAudioPlayer pokemon={pokemon} gameVersion={gameVersion} />
           </div>
-          <GameVersionSelector currentVersion={gameVersion} onVersionChange={setGameVersion} />
+          <GameVersionSelector
+            currentVersion={gameVersion}
+            onVersionChange={setGameVersion}
+          />
         </div>
-
         <Tabs defaultValue="stats" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="stats">Stats</TabsTrigger>
             <TabsTrigger value="moves" className="relative">
               TMs & Moves
-              {tmMovesLoading && <Loader2 className="h-3 w-3 animate-spin ml-1" />}
+              {tmMovesLoading && (
+                <Loader2 className="h-3 w-3 animate-spin ml-1" />
+              )}
             </TabsTrigger>
             <TabsTrigger value="locations" className="relative">
               Locations
-              {encountersLoading && <Loader2 className="h-3 w-3 animate-spin ml-1" />}
+              {encountersLoading && (
+                <Loader2 className="h-3 w-3 animate-spin ml-1" />
+              )}
             </TabsTrigger>
             <TabsTrigger value="evolution" className="relative">
               Evolution
-              {evolutionLoading && <Loader2 className="h-3 w-3 animate-spin ml-1" />}
+              {evolutionLoading && (
+                <Loader2 className="h-3 w-3 animate-spin ml-1" />
+              )}
             </TabsTrigger>
           </TabsList>
 
@@ -151,13 +188,17 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
             <PokemonMoves
               moves={tmMovesData}
               isLoading={tmMovesLoading}
-              getTypeColor={getTypeColor}
+              getTypeColor={getTypeColor.base}
               gameVersion={gameVersion}
             />
           </TabsContent>
 
           <TabsContent value="locations" className="space-y-4">
-            <PokemonLocations encounters={filteredEncounters} isLoading={encountersLoading} gameVersion={gameVersion} />
+            <PokemonLocations
+              encounters={filteredEncounters}
+              isLoading={encountersLoading}
+              gameVersion={gameVersion}
+            />
           </TabsContent>
 
           <TabsContent value="evolution" className="space-y-4">
@@ -185,12 +226,20 @@ function LoadingCard() {
   )
 }
 
-function ErrorCard({ error, onRetry }: { error?: string; onRetry: () => void }) {
+function ErrorCard({
+  error,
+  onRetry,
+}: {
+  error?: string
+  onRetry: () => void
+}) {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardContent className="flex items-center justify-center h-64">
         <div className="text-center">
-          <p className="text-red-500 mb-4">{error || "An error occurred while loading Pokémon data"}</p>
+          <p className="text-red-500 mb-4">
+            {error || 'An error occurred while loading Pokémon data'}
+          </p>
           <Button onClick={onRetry} variant="outline">
             <RefreshCw className="h-4 w-4 mr-2" />
             Try Again
@@ -204,15 +253,22 @@ function ErrorCard({ error, onRetry }: { error?: string; onRetry: () => void }) 
 interface PokemonHeaderProps {
   pokemon: any
   isFetching: boolean
-  getTypeColor: (type: string) => string
+  getTypeColor: (type: string) => { base: string; hover: string }
 }
 
-function PokemonHeader({ pokemon, isFetching, getTypeColor }: PokemonHeaderProps) {
+function PokemonHeader({
+  pokemon,
+  isFetching,
+  getTypeColor,
+}: PokemonHeaderProps) {
   return (
     <CardHeader className="text-center">
       <div className="flex items-center justify-center gap-4 mb-4 relative">
         <PokemonImage
-          src={pokemon.sprites.other["official-artwork"].front_default || pokemon.sprites.front_default}
+          src={
+            pokemon.sprites.other['official-artwork'].front_default ||
+            pokemon.sprites.front_default
+          }
           alt={pokemon.name}
           width={150}
           height={150}
@@ -225,11 +281,14 @@ function PokemonHeader({ pokemon, isFetching, getTypeColor }: PokemonHeaderProps
         )}
       </div>
       <CardTitle className="text-3xl font-bold capitalize">
-        {pokemon.name} #{pokemon.id.toString().padStart(3, "0")}
+        {pokemon.name} #{pokemon.id.toString().padStart(3, '0')}
       </CardTitle>
       <div className="flex justify-center gap-2">
         {pokemon.types.map((type: any) => (
-          <Badge key={type.type.name} className={`${getTypeColor(type.type.name)} text-white`}>
+          <Badge
+            key={type.type.name}
+            className={`${getTypeColor(type.type.name)} text-white hover:${getTypeColor(type.type.name)}/50`}
+          >
             {type.type.name}
           </Badge>
         ))}
