@@ -74,32 +74,8 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
       ),
     }))
 
-  const getTypeColor = (type: string): { base: string; hover: string } => {
-    const colors: Record<string, { base: string; hover: string }> = {
-      fire: { base: 'bg-red-500', hover: 'hover:bg-red-500/80' },
-      water: { base: 'bg-blue-500', hover: 'hover:bg-blue-500/80' },
-      grass: { base: 'bg-green-500', hover: 'hover:bg-green-500/80' },
-      electric: { base: 'bg-yellow-500', hover: 'hover:bg-yellow-500/80' },
-      psychic: { base: 'bg-pink-500', hover: 'hover:bg-pink-500/80' },
-      ice: { base: 'bg-cyan-500', hover: 'hover:bg-cyan-500/80' },
-      dragon: { base: 'bg-purple-500', hover: 'hover:bg-purple-500/80' },
-      dark: { base: 'bg-gray-800', hover: 'hover:bg-gray-800/80' },
-      fairy: { base: 'bg-pink-300', hover: 'hover:bg-pink-300/80' },
-      normal: { base: 'bg-gray-400', hover: 'hover:bg-gray-400/80' },
-      fighting: { base: 'bg-red-700', hover: 'hover:bg-red-700/80' },
-      poison: { base: 'bg-purple-600', hover: 'hover:bg-purple-600/80' },
-      ground: { base: 'bg-yellow-600', hover: 'hover:bg-yellow-600/80' },
-      flying: { base: 'bg-indigo-400', hover: 'hover:bg-indigo-400/80' },
-      bug: { base: 'bg-green-400', hover: 'hover:bg-green-400/80' },
-      rock: { base: 'bg-yellow-800', hover: 'hover:bg-yellow-800/80' },
-      ghost: { base: 'bg-purple-700', hover: 'hover:bg-purple-700/80' },
-      steel: { base: 'bg-gray-500', hover: 'hover:bg-gray-500/80' },
-    }
-
-    return (
-      colors[type] || { base: 'bg-gray-400', hover: 'hover:bg-gray-400/80' }
-    )
-  }
+  const getTypeColor = (type: string): string =>
+    `bg-pokemonTypes-${type} hover:bg-pokemonTypes-${type}`
 
   const isLoading =
     pokemonLoading ||
@@ -188,7 +164,7 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
             <PokemonMoves
               moves={tmMovesData}
               isLoading={tmMovesLoading}
-              getTypeColor={getTypeColor.base}
+              getTypeColor={getTypeColor}
               gameVersion={gameVersion}
             />
           </TabsContent>
@@ -253,7 +229,7 @@ function ErrorCard({
 interface PokemonHeaderProps {
   pokemon: any
   isFetching: boolean
-  getTypeColor: (type: string) => { base: string; hover: string }
+  getTypeColor: (type: string) => string
 }
 
 function PokemonHeader({
@@ -287,7 +263,7 @@ function PokemonHeader({
         {pokemon.types.map((type: any) => (
           <Badge
             key={type.type.name}
-            className={`${getTypeColor(type.type.name)} text-white hover:${getTypeColor(type.type.name)}/50`}
+            className={`${getTypeColor(type.type.name)} text-white hover:${getTypeColor(type.type.name)}`}
           >
             {type.type.name}
           </Badge>
