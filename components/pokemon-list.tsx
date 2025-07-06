@@ -1,18 +1,30 @@
-"use client"
+'use client'
 
-import { useState, useMemo } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Search, List, Hash, Eye, EyeOff } from "lucide-react"
-import { useQuery } from "@tanstack/react-query"
-import { gameVersions } from "@/lib/constants"
-import { PokemonImage } from "./pokemon-image"
-import { DittoLoader } from "./ditto-loader"
+import { useState, useMemo } from 'react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { Search, List, Hash, Eye, EyeOff } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
+import { gameVersions } from '@/lib/constants'
+import { PokemonImage } from './pokemon-image'
+import { DittoLoader } from './ditto-loader'
 
 interface PokemonListItem {
   id: number
@@ -26,67 +38,80 @@ interface PokemonListProps {
   currentPokemon?: string
 }
 
-export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProps) {
+export function PokemonList({
+  onPokemonSelect,
+  currentPokemon,
+}: PokemonListProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedGame, setSelectedGame] = useState("red-blue")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [typeFilter, setTypeFilter] = useState("all")
+  const [selectedGame, setSelectedGame] = useState('red-blue')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [typeFilter, setTypeFilter] = useState('all')
   const [showImages, setShowImages] = useState(true)
 
   // Fetch Pokemon by generation
   const { data: pokemonList = [], isLoading } = useQuery({
-    queryKey: ["pokemon-list-detailed", selectedGame],
+    queryKey: ['pokemon-list-detailed', selectedGame],
     queryFn: async () => {
       const gameToGeneration: Record<string, number> = {
-        "red-blue": 1,
+        'red-blue': 1,
         yellow: 1,
-        "gold-silver": 2,
+        'gold-silver': 2,
         crystal: 2,
-        "ruby-sapphire": 3,
+        'ruby-sapphire': 3,
         emerald: 3,
-        "firered-leafgreen": 3,
-        "diamond-pearl": 4,
+        'firered-leafgreen': 3,
+        'diamond-pearl': 4,
         platinum: 4,
-        "heartgold-soulsilver": 4,
-        "black-white": 5,
-        "black-2-white-2": 5,
-        "x-y": 6,
-        "omega-ruby-alpha-sapphire": 6,
-        "sun-moon": 7,
-        "ultra-sun-ultra-moon": 7,
-        "sword-shield": 8,
-        "brilliant-diamond-shining-pearl": 8,
-        "legends-arceus": 8,
-        "scarlet-violet": 9,
+        'heartgold-soulsilver': 4,
+        'black-white': 5,
+        'black-2-white-2': 5,
+        'x-y': 6,
+        'omega-ruby-alpha-sapphire': 6,
+        'sun-moon': 7,
+        'ultra-sun-ultra-moon': 7,
+        'sword-shield': 8,
+        'brilliant-diamond-shining-pearl': 8,
+        'legends-arceus': 8,
+        'scarlet-violet': 9,
       }
 
       const generationId = gameToGeneration[selectedGame]
       if (!generationId) return []
 
       // Fetch generation data
-      const genResponse = await fetch(`https://pokeapi.co/api/v2/generation/${generationId}`)
+      const genResponse = await fetch(
+        `https://pokeapi.co/api/v2/generation/${generationId}`,
+      )
       const genData = await genResponse.json()
 
       // Fetch detailed data for each Pokemon (limited to first 50 for performance)
-      const pokemonPromises = genData.pokemon_species.slice(0, 150).map(async (species: any) => {
-        try {
-          const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${species.name}`)
-          const pokemonData = await pokemonResponse.json()
+      const pokemonPromises = genData.pokemon_species
+        .slice(0, 150)
+        .map(async (species: any) => {
+          try {
+            const pokemonResponse = await fetch(
+              `https://pokeapi.co/api/v2/pokemon/${species.name}`,
+            )
+            const pokemonData = await pokemonResponse.json()
 
-          return {
-            id: pokemonData.id,
-            name: pokemonData.name,
-            types: pokemonData.types.map((t: any) => t.type.name),
-            sprite: pokemonData.sprites.front_default || pokemonData.sprites.other?.["official-artwork"]?.front_default,
+            return {
+              id: pokemonData.id,
+              name: pokemonData.name,
+              types: pokemonData.types.map((t: any) => t.type.name),
+              sprite:
+                pokemonData.sprites.front_default ||
+                pokemonData.sprites.other?.['official-artwork']?.front_default,
+            }
+          } catch (error) {
+            console.error(`Failed to fetch ${species.name}:`, error)
+            return null
           }
-        } catch (error) {
-          console.error(`Failed to fetch ${species.name}:`, error)
-          return null
-        }
-      })
+        })
 
       const results = await Promise.all(pokemonPromises)
-      return results.filter(Boolean).sort((a, b) => a!.id - b!.id) as PokemonListItem[]
+      return results
+        .filter(Boolean)
+        .sort((a, b) => a!.id - b!.id) as PokemonListItem[]
     },
     staleTime: 1000 * 60 * 30, // 30 minutes
     gcTime: 1000 * 60 * 60, // 1 hour
@@ -105,8 +130,10 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
   const filteredPokemon = useMemo(() => {
     return pokemonList.filter((pokemon) => {
       const matchesSearch =
-        pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) || pokemon.id.toString().includes(searchQuery)
-      const matchesType = typeFilter === "all" || pokemon.types.includes(typeFilter)
+        pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        pokemon.id.toString().includes(searchQuery)
+      const matchesType =
+        typeFilter === 'all' || pokemon.types.includes(typeFilter)
       return matchesSearch && matchesType
     })
   }, [pokemonList, searchQuery, typeFilter])
@@ -118,26 +145,26 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
 
   const getTypeColor = (type: string) => {
     const colors: Record<string, string> = {
-      fire: "bg-red-500",
-      water: "bg-blue-500",
-      grass: "bg-green-500",
-      electric: "bg-yellow-500",
-      psychic: "bg-pink-500",
-      ice: "bg-cyan-500",
-      dragon: "bg-purple-500",
-      dark: "bg-gray-800",
-      fairy: "bg-pink-300",
-      normal: "bg-gray-400",
-      fighting: "bg-red-700",
-      poison: "bg-purple-600",
-      ground: "bg-yellow-600",
-      flying: "bg-indigo-400",
-      bug: "bg-green-400",
-      rock: "bg-yellow-800",
-      ghost: "bg-purple-700",
-      steel: "bg-gray-500",
+      fire: 'bg-red-500',
+      water: 'bg-blue-500',
+      grass: 'bg-green-500',
+      electric: 'bg-yellow-500',
+      psychic: 'bg-pink-500',
+      ice: 'bg-cyan-500',
+      dragon: 'bg-purple-500',
+      dark: 'bg-gray-800',
+      fairy: 'bg-pink-300',
+      normal: 'bg-gray-400',
+      fighting: 'bg-red-700',
+      poison: 'bg-purple-600',
+      ground: 'bg-yellow-600',
+      flying: 'bg-indigo-400',
+      bug: 'bg-green-400',
+      rock: 'bg-yellow-800',
+      ghost: 'bg-purple-700',
+      steel: 'bg-gray-500',
     }
-    return colors[type] || "bg-gray-400"
+    return colors[type] || 'bg-gray-400'
   }
 
   const handlePokemonSelect = (pokemon: string) => {
@@ -167,7 +194,11 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
                 onClick={() => setShowImages(!showImages)}
                 className="flex items-center gap-1"
               >
-                {showImages ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showImages ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
               </Button>
             </div>
           </SheetTitle>
@@ -176,7 +207,9 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
         <div className="space-y-4 mt-6">
           {/* Game Selection */}
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-2 block">Game Version</label>
+            <label className="text-sm font-medium text-gray-700 mb-2 block">
+              Game Version
+            </label>
             <Select value={selectedGame} onValueChange={setSelectedGame}>
               <SelectTrigger>
                 <SelectValue />
@@ -211,7 +244,9 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
                 {availableTypes.map((type) => (
                   <SelectItem key={type} value={type}>
                     <div className="flex items-center gap-2">
-                      <div className={`w-3 h-3 rounded-full ${getTypeColor(type)}`} />
+                      <div
+                        className={`w-3 h-3 rounded-full ${getTypeColor(type)}`}
+                      />
                       <span className="capitalize">{type}</span>
                     </div>
                   </SelectItem>
@@ -223,15 +258,16 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
           {/* Stats */}
           <div className="flex items-center justify-between text-sm text-gray-600 border-b pb-2">
             <span>
-              {getGameDisplayName(selectedGame)} - {filteredPokemon.length} of {pokemonList.length}
+              {getGameDisplayName(selectedGame)} - {filteredPokemon.length} of{' '}
+              {pokemonList.length}
             </span>
-            {(searchQuery || typeFilter !== "all") && (
+            {(searchQuery || typeFilter !== 'all') && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => {
-                  setSearchQuery("")
-                  setTypeFilter("all")
+                  setSearchQuery('')
+                  setTypeFilter('all')
                 }}
                 className="text-xs h-6"
               >
@@ -252,7 +288,9 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
                   <Card
                     key={poke.id}
                     className={`cursor-pointer transition-all hover:shadow-md ${
-                      currentPokemon === poke.name ? "ring-2 ring-blue-500 bg-blue-50" : ""
+                      currentPokemon === poke.name
+                        ? 'ring-2 ring-blue-500 bg-blue-49'
+                        : ''
                     }`}
                     onClick={() => handlePokemonSelect(poke.name)}
                   >
@@ -276,8 +314,12 @@ export function PokemonList({ onPokemonSelect, currentPokemon }: PokemonListProp
                       )}
 
                       <div className="space-y-1">
-                        <div className="font-medium text-sm capitalize truncate">{poke.name}</div>
-                        <div className="text-xs text-gray-500">#{poke.id.toString().padStart(3, "0")}</div>
+                        <div className="font-medium text-sm capitalize truncate">
+                          {poke.name}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          #{poke.id.toString().padStart(3, '0')}
+                        </div>
                         <div className="flex flex-wrap gap-1 justify-center">
                           {poke.types.map((type) => (
                             <Badge
