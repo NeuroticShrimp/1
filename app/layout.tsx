@@ -9,8 +9,8 @@ import { ThemeSwitcher } from '@/components/theme-switcher'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Pokédex App',
-  description: 'A comprehensive Pokemon app with caching',
+  title: 'Pokédex',
+  description: 'Information about Pokémon',
   generator: 'v0.dev',
 }
 

@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useMemo } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -75,10 +74,12 @@ export function PokemonList({
       }
       const generationId = gameToGeneration[selectedGame]
       if (!generationId) return []
+
       const genResponse = await fetch(
         `https://pokeapi.co/api/v2/generation/${generationId}`,
       )
       const genData = await genResponse.json()
+
       const pokemonPromises = genData.pokemon_species.map(
         async (species: any) => {
           try {
@@ -159,7 +160,6 @@ export function PokemonList({
 
   const handlePokemonSelect = (pokemon: string) => {
     onPokemonSelect(pokemon)
-    setIsOpen(false)
   }
 
   return (
@@ -269,11 +269,11 @@ export function PokemonList({
             </div>
           ) : (
             <ScrollArea className="h-[calc(100vh-300px)]">
-              <div className="grid grid-cols-2 gap-3 pr-4">
+              <div className="grid grid-cols-2 gap-1 pr-4">
                 {filteredPokemon.map((poke) => (
                   <Card
                     key={poke.id}
-                    className={`cursor-pointer transition-all hover:shadow-md ${
+                    className={`cursor-pointer transition-all hover:shadow-md m-2 ${
                       currentPokemon === poke.name
                         ? 'ring-2 ring-blue-500 bg-blue-50'
                         : ''

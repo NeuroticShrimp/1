@@ -14,13 +14,11 @@ export default function PokemonApp() {
   const [searchedPokemon, setSearchedPokemon] = useState('pikachu')
   const [recentSearches, setRecentSearches] = useState<string[]>(['pikachu'])
   const [gameFilter, setGameFilter] = useState<string>('all')
-
   const queryClient = useQueryClient()
 
   const handleSearch = (pokemon: string) => {
     const newPokemon = pokemon.toLowerCase().trim()
     setSearchedPokemon(newPokemon)
-
     // Add to recent searches
     setRecentSearches((prev) => {
       const filtered = prev.filter((p) => p !== newPokemon)
@@ -47,14 +45,12 @@ export default function PokemonApp() {
   const getCacheStats = () => {
     const cache = queryClient.getQueryCache()
     const queries = cache.getAll()
-
     // Group endpoints by type
     const endpoints = queries.reduce((acc: Record<string, number>, query) => {
       const key = query.queryKey[0] as string
       acc[key] = (acc[key] || 0) + 1
       return acc
     }, {})
-
     return {
       total: queries.length,
       fresh: queries.filter((q) => q.isStale() === false).length,
@@ -74,7 +70,6 @@ export default function PokemonApp() {
             <Zap className="h-8 w-8" />
             Pokédex
           </h1>
-
           {/* Search Bar with Pokemon List Button and Cache Stats */}
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="flex items-center gap-2">
@@ -93,7 +88,6 @@ export default function PokemonApp() {
             </div>
             <CacheStatsCompact stats={cacheStats} onClear={clearCache} />
           </div>
-
           {/* Quick Access Recent Searches */}
           {recentSearches.length > 1 && (
             <div className="mb-4">
@@ -123,7 +117,6 @@ export default function PokemonApp() {
             </div>
           )}
         </div>
-
         {/* Pokemon Card */}
         <PokemonCard pokemonName={searchedPokemon} />
       </div>
