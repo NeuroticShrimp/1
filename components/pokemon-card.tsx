@@ -126,7 +126,7 @@ export function PokemonCard({ pokemonName }: PokemonCardProps) {
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-2">
             {/* Pass both pokemon object and gameVersion */}
-            <PokemonAudioPlayer pokemon={pokemon} gameVersion={gameVersion} />
+            <PokemonAudioPlayer pokemon={pokemon} />
           </div>
           <GameVersionSelector
             currentVersion={gameVersion}
