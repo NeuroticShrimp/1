@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import type React from "react"
-import { useState, useRef, useEffect } from "react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Search, Clock, Loader2, X } from "lucide-react"
-import { usePokemonSuggestions } from "@/hooks/use-pokemon-suggestions"
+import type React from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Search, Clock, Loader2, X } from 'lucide-react'
+import { usePokemonSuggestions } from '@/hooks/use-pokemon-suggestions'
 
 interface PokemonSearchProps {
   value: string
@@ -37,14 +37,17 @@ export function PokemonSearch({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false)
         setSelectedIndex(-1)
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,22 +63,24 @@ export function PokemonSearch({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!showDropdown) {
-      if (e.key === "Enter") {
+      if (e.key === 'Enter') {
         handleSearch()
       }
       return
     }
 
     switch (e.key) {
-      case "ArrowDown":
+      case 'ArrowDown':
         e.preventDefault()
-        setSelectedIndex((prev) => (prev < allOptions.length - 1 ? prev + 1 : prev))
+        setSelectedIndex((prev) =>
+          prev < allOptions.length - 1 ? prev + 1 : prev,
+        )
         break
-      case "ArrowUp":
+      case 'ArrowUp':
         e.preventDefault()
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1))
         break
-      case "Enter":
+      case 'Enter':
         e.preventDefault()
         if (selectedIndex >= 0 && selectedIndex < allOptions.length) {
           selectOption(allOptions[selectedIndex])
@@ -83,7 +88,7 @@ export function PokemonSearch({
           handleSearch()
         }
         break
-      case "Escape":
+      case 'Escape':
         setIsOpen(false)
         setSelectedIndex(-1)
         inputRef.current?.blur()
@@ -92,7 +97,7 @@ export function PokemonSearch({
   }
 
   const selectOption = (pokemon: string) => {
-    onChange("")
+    onChange('')
     onSearch(pokemon)
     setIsOpen(false)
     setSelectedIndex(-1)
@@ -102,7 +107,7 @@ export function PokemonSearch({
   const handleSearch = () => {
     if (value.trim()) {
       onSearch(value.trim())
-      onChange("")
+      onChange('')
       setIsOpen(false)
       setSelectedIndex(-1)
     }
@@ -181,14 +186,25 @@ interface SuggestionsListProps {
   query: string
 }
 
-function SuggestionsList({ suggestions, selectedIndex, onSelect, query }: SuggestionsListProps) {
+function SuggestionsList({
+  suggestions,
+  selectedIndex,
+  onSelect,
+  query,
+}: SuggestionsListProps) {
   if (suggestions.length === 0) {
-    return <div className="py-2 text-center text-sm text-gray-500">No Pokémon found matching "{query}"</div>
+    return (
+      <div className="py-2 text-center text-sm text-gray-500">
+        No Pokémon found matching "{query}"
+      </div>
+    )
   }
 
   return (
     <div className="space-y-1">
-      <div className="text-xs text-gray-500 px-2 py-1 border-b">Suggestions</div>
+      <div className="text-xs text-gray-500 px-2 py-1 border-b">
+        Suggestions
+      </div>
       {suggestions.map((pokemon, index) => (
         <SuggestionItem
           key={pokemon}
@@ -209,16 +225,27 @@ interface SuggestionItemProps {
   query: string
 }
 
-function SuggestionItem({ pokemon, isSelected, onClick, query }: SuggestionItemProps) {
+function SuggestionItem({
+  pokemon,
+  isSelected,
+  onClick,
+  query,
+}: SuggestionItemProps) {
   const highlightMatch = (text: string, query: string) => {
     if (!query.trim()) return text
 
-    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi")
+    const regex = new RegExp(
+      `(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`,
+      'gi',
+    )
     const parts = text.split(regex)
 
     return parts.map((part, index) =>
       regex.test(part) ? (
-        <mark key={index} className="bg-yellow-200 text-yellow-800 rounded px-0.5">
+        <mark
+          key={index}
+          className="bg-yellow-200 text-yellow-800 rounded px-0.5"
+        >
           {part}
         </mark>
       ) : (
@@ -230,7 +257,7 @@ function SuggestionItem({ pokemon, isSelected, onClick, query }: SuggestionItemP
   return (
     <div
       className={`px-2 py-2 rounded cursor-pointer transition-colors capitalize ${
-        isSelected ? "bg-blue-100 text-blue-900" : "hover:bg-gray-100"
+        isSelected ? 'bg-blue-100 text-blue-900' : 'hover:bg-gray-100'
       }`}
       onClick={onClick}
     >
@@ -246,9 +273,18 @@ interface RecentSearchesListProps {
   onClear?: () => void
 }
 
-function RecentSearchesList({ searches, selectedIndex, onSelect, onClear }: RecentSearchesListProps) {
+function RecentSearchesList({
+  searches,
+  selectedIndex,
+  onSelect,
+  onClear,
+}: RecentSearchesListProps) {
   if (searches.length === 0) {
-    return <div className="py-2 text-center text-sm text-gray-500">No recent searches</div>
+    return (
+      <div className="py-2 text-center text-sm text-gray-500">
+        No recent searches
+      </div>
+    )
   }
 
   return (
@@ -259,7 +295,12 @@ function RecentSearchesList({ searches, selectedIndex, onSelect, onClear }: Rece
           Recent Searches
         </div>
         {onClear && (
-          <Button variant="ghost" size="sm" onClick={onClear} className="h-5 w-5 p-0 text-gray-400 hover:text-gray-600">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClear}
+            className="h-5 w-5 p-0 text-gray-400 hover:text-gray-600"
+          >
             <X className="h-3 w-3" />
           </Button>
         )}
@@ -268,7 +309,9 @@ function RecentSearchesList({ searches, selectedIndex, onSelect, onClear }: Rece
         <div
           key={pokemon}
           className={`px-2 py-2 rounded cursor-pointer transition-colors capitalize ${
-            index === selectedIndex ? "bg-blue-100 text-blue-900" : "hover:bg-gray-100"
+            index === selectedIndex
+              ? 'bg-blue-100 text-blue-900'
+              : 'hover:bg-gray-100'
           }`}
           onClick={() => onSelect(pokemon)}
         >

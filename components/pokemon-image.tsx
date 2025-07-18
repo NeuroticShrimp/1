@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { DittoLoader } from './ditto-loader'
 
@@ -22,13 +22,14 @@ export function PokemonImage({
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
-  // Default Pikachu image from the official Pokemon API
-  const pikachuFallbackImage =
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'
+  // Reset state when src changes to allow for re-loading
+  useEffect(() => {
+    setIsLoading(true)
+    setHasError(false)
+  }, [src])
 
   const handleLoad = () => {
     setIsLoading(false)
-    setHasError(false)
   }
 
   const handleError = () => {
@@ -36,36 +37,35 @@ export function PokemonImage({
     setHasError(true)
   }
 
+  const showLoader = isLoading || hasError
+
   return (
     <div
       className={`relative flex items-center justify-center ${className}`}
       style={{ width, height }}
     >
-      {/* Ditto Loader - shown while loading */}
-      {isLoading && (
+      {/* Ditto Loader - shown while loading or on error */}
+      {showLoader && (
         <div className="absolute inset-0 flex items-center justify-center">
           <DittoLoader size={Math.min(width, height) * 0.8} />
         </div>
       )}
 
-      {/* Original Pokemon Image */}
+      {/* 
+        The Image component is always rendered so that the onLoad and onError events can be triggered.
+        We control its visibility with opacity.
+        When an error occurs, the loader is shown, and this image is hidden.
+      */}
       <Image
-        src={hasError ? pikachuFallbackImage : src || '/placeholder.svg'}
-        alt={hasError ? 'Pikachu (fallback)' : alt}
+        src={src || '/placeholder.svg'}
+        alt={alt}
         width={width}
         height={height}
-        className={`pixelated transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+        className={`pixelated transition-opacity duration-300 ${showLoader ? 'opacity-0' : 'opacity-100'}`}
         onLoad={handleLoad}
         onError={handleError}
         priority
       />
-
-      {/* Error message - small notification that we're showing Pikachu instead */}
-      {hasError && !isLoading && (
-        <div className="absolute bottom-0 left-0 right-0 bg-yellow-500 text-yellow-900 text-xs py-1 px-2 text-center rounded-b-md opacity-80">
-          Loading
-        </div>
-      )}
     </div>
   )
 }

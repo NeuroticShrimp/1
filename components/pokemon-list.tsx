@@ -48,7 +48,6 @@ export function PokemonList({
   const [typeFilter, setTypeFilter] = useState('all')
   const [showImages, setShowImages] = useState(true)
 
-  // Fetch Pokemon by generation
   const { data: pokemonList = [], isLoading } = useQuery({
     queryKey: ['pokemon-list-detailed', selectedGame],
     queryFn: async () => {
@@ -74,26 +73,19 @@ export function PokemonList({
         'legends-arceus': 8,
         'scarlet-violet': 9,
       }
-
       const generationId = gameToGeneration[selectedGame]
       if (!generationId) return []
-
-      // Fetch generation data
       const genResponse = await fetch(
         `https://pokeapi.co/api/v2/generation/${generationId}`,
       )
       const genData = await genResponse.json()
-
-      // Fetch detailed data for each Pokemon (limited to first 50 for performance)
-      const pokemonPromises = genData.pokemon_species
-        .slice(0, 150)
-        .map(async (species: any) => {
+      const pokemonPromises = genData.pokemon_species.map(
+        async (species: any) => {
           try {
             const pokemonResponse = await fetch(
               `https://pokeapi.co/api/v2/pokemon/${species.name}`,
             )
             const pokemonData = await pokemonResponse.json()
-
             return {
               id: pokemonData.id,
               name: pokemonData.name,
@@ -106,18 +98,17 @@ export function PokemonList({
             console.error(`Failed to fetch ${species.name}:`, error)
             return null
           }
-        })
-
+        },
+      )
       const results = await Promise.all(pokemonPromises)
       return results
         .filter(Boolean)
         .sort((a, b) => a!.id - b!.id) as PokemonListItem[]
     },
-    staleTime: 1000 * 60 * 30, // 30 minutes
-    gcTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 30,
+    gcTime: 1000 * 60 * 60,
   })
 
-  // Get unique types for filter
   const availableTypes = useMemo(() => {
     const types = new Set<string>()
     pokemonList.forEach((pokemon) => {
@@ -126,7 +117,6 @@ export function PokemonList({
     return Array.from(types).sort()
   }, [pokemonList])
 
-  // Filter Pokemon based on search and type
   const filteredPokemon = useMemo(() => {
     return pokemonList.filter((pokemon) => {
       const matchesSearch =
@@ -169,13 +159,17 @@ export function PokemonList({
 
   const handlePokemonSelect = (pokemon: string) => {
     onPokemonSelect(pokemon)
-    setIsOpen(false) // Close the sheet when a Pokemon is selected
+    setIsOpen(false)
   }
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm" className="flex items-center gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-2 bg-white"
+        >
           <List className="h-4 w-4" />
           Browse Pokemon
         </Button>
@@ -203,9 +197,7 @@ export function PokemonList({
             </div>
           </SheetTitle>
         </SheetHeader>
-
         <div className="space-y-4 mt-6">
-          {/* Game Selection */}
           <div>
             <label className="text-sm font-medium text-gray-700 mb-2 block">
               Game Version
@@ -223,8 +215,6 @@ export function PokemonList({
               </SelectContent>
             </Select>
           </div>
-
-          {/* Search and Type Filter */}
           <div className="space-y-2">
             <div className="relative">
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -254,8 +244,6 @@ export function PokemonList({
               </SelectContent>
             </Select>
           </div>
-
-          {/* Stats */}
           <div className="flex items-center justify-between text-sm text-gray-600 border-b pb-2">
             <span>
               {getGameDisplayName(selectedGame)} - {filteredPokemon.length} of{' '}
@@ -275,11 +263,9 @@ export function PokemonList({
               </Button>
             )}
           </div>
-
-          {/* Pokemon Grid */}
           {isLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <DittoLoader size={60} />
+            <div className="flex items-center justify-center py-8">
+              <DittoLoader size={32} showText={false} />
             </div>
           ) : (
             <ScrollArea className="h-[calc(100vh-300px)]">
@@ -289,7 +275,7 @@ export function PokemonList({
                     key={poke.id}
                     className={`cursor-pointer transition-all hover:shadow-md ${
                       currentPokemon === poke.name
-                        ? 'ring-2 ring-blue-500 bg-blue-49'
+                        ? 'ring-2 ring-blue-500 bg-blue-50'
                         : ''
                     }`}
                     onClick={() => handlePokemonSelect(poke.name)}
@@ -312,7 +298,6 @@ export function PokemonList({
                           )}
                         </div>
                       )}
-
                       <div className="space-y-1">
                         <div className="font-medium text-sm capitalize truncate">
                           {poke.name}
