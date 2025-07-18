@@ -74,12 +74,10 @@ export function PokemonList({
       }
       const generationId = gameToGeneration[selectedGame]
       if (!generationId) return []
-
       const genResponse = await fetch(
         `https://pokeapi.co/api/v2/generation/${generationId}`,
       )
       const genData = await genResponse.json()
-
       const pokemonPromises = genData.pokemon_species.map(
         async (species: any) => {
           try {
@@ -176,7 +174,7 @@ export function PokemonList({
       </SheetTrigger>
       <SheetContent side="right" className="w-[400px] sm:w-[500px]">
         <SheetHeader>
-          <SheetTitle className="flex items-center justify-between">
+          <SheetTitle className="flex items-center justify-between pr-12">
             <span className="flex items-center gap-2">
               <List className="h-5 w-5" />
               Pokemon Browser
@@ -184,15 +182,17 @@ export function PokemonList({
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
-                size="sm"
+                size="icon"
                 onClick={() => setShowImages(!showImages)}
-                className="flex items-center gap-1"
+                className="h-8 w-8"
+                title={showImages ? 'Show as list' : 'Show as grid'}
               >
                 {showImages ? (
                   <EyeOff className="h-4 w-4" />
                 ) : (
                   <Eye className="h-4 w-4" />
                 )}
+                <span className="sr-only">Toggle view</span>
               </Button>
             </div>
           </SheetTitle>
@@ -269,19 +269,19 @@ export function PokemonList({
             </div>
           ) : (
             <ScrollArea className="h-[calc(100vh-300px)]">
-              <div className="grid grid-cols-2 gap-1 pr-4">
-                {filteredPokemon.map((poke) => (
-                  <Card
-                    key={poke.id}
-                    className={`cursor-pointer transition-all hover:shadow-md m-2 ${
-                      currentPokemon === poke.name
-                        ? 'ring-2 ring-blue-500 bg-blue-50'
-                        : ''
-                    }`}
-                    onClick={() => handlePokemonSelect(poke.name)}
-                  >
-                    <CardContent className="p-3 text-center">
-                      {showImages && (
+              {showImages ? (
+                <div className="grid grid-cols-2 gap-1 pr-4">
+                  {filteredPokemon.map((poke) => (
+                    <Card
+                      key={poke.id}
+                      className={`cursor-pointer transition-all hover:shadow-md m-2 ${
+                        currentPokemon === poke.name
+                          ? 'ring-2 ring-blue-500 bg-blue-50'
+                          : ''
+                      }`}
+                      onClick={() => handlePokemonSelect(poke.name)}
+                    >
+                      <CardContent className="p-3 text-center">
                         <div className="w-16 h-16 mx-auto mb-2">
                           {poke.sprite ? (
                             <PokemonImage
@@ -297,30 +297,50 @@ export function PokemonList({
                             </div>
                           )}
                         </div>
-                      )}
-                      <div className="space-y-1">
-                        <div className="font-medium text-sm capitalize truncate">
-                          {poke.name}
+                        <div className="space-y-1">
+                          <div className="font-medium text-sm capitalize truncate">
+                            {poke.name}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            #{poke.id.toString().padStart(3, '0')}
+                          </div>
+                          <div className="flex flex-wrap gap-1 justify-center">
+                            {poke.types.map((type) => (
+                              <Badge
+                                key={type}
+                                className={`${getTypeColor(type)} text-white text-xs`}
+                                variant="secondary"
+                              >
+                                {type}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
-                        <div className="text-xs text-gray-500">
-                          #{poke.id.toString().padStart(3, '0')}
-                        </div>
-                        <div className="flex flex-wrap gap-1 justify-center">
-                          {poke.types.map((type) => (
-                            <Badge
-                              key={type}
-                              className={`${getTypeColor(type)} text-white text-xs`}
-                              variant="secondary"
-                            >
-                              {type}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col space-y-1 pr-4">
+                  {filteredPokemon.map((poke) => (
+                    <Button
+                      key={poke.id}
+                      variant="ghost"
+                      className={`w-full justify-start capitalize h-auto py-2 px-3 ${
+                        currentPokemon === poke.name
+                          ? 'bg-accent text-accent-foreground'
+                          : ''
+                      }`}
+                      onClick={() => handlePokemonSelect(poke.name)}
+                    >
+                      <span className="text-xs text-muted-foreground w-10 text-right mr-3">
+                        #{poke.id.toString().padStart(3, '0')}
+                      </span>
+                      <span className="font-medium">{poke.name}</span>
+                    </Button>
+                  ))}
+                </div>
+              )}
             </ScrollArea>
           )}
         </div>
